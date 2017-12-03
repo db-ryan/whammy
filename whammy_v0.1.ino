@@ -1,27 +1,12 @@
 #include <MIDI.h>
 #include <Bounce.h>
 
+#include "pins.h"
+#include "midiSettings.h"
+
 // Takes a footswitch up and down and turns it into
 // a MIDI signal for a Digitech Whammy
 static const byte version = 1;
-static const byte programChangeUp = 1;
-static const byte programChangeDown = -1;
-
-/*
-   Pin Definitions
-*/
-const int onLedPin = 13; // LED on Teensy
-static const byte programChangeUpPin = 2; // footswitch up pin
-static const byte programChangeDownPin = 3; // footswitch down pin
-
-/*
-   MIDI/Footswitch Settings
-*/
-MIDI_CREATE_DEFAULT_INSTANCE();
-static const byte midiChannel = 1; // MIDI Channgel to use
-Bounce buttonUp = Bounce(programChangeUpPin, 10); // 10ms debounce
-Bounce buttonDown = Bounce(programChangeDownPin, 10); // 10ms debounce
-unsigned byte currentProgram = 43;
 
 /*
    Run once upon boot of the Teensy
@@ -33,7 +18,7 @@ void setup() {
   /*
    * Set Pin Modes
    */
-  pinMode(ledPin, OUTPUT);
+  pinMode(onLedPin, OUTPUT);
   pinMode(programChangeUpPin, INPUT_PULLUP);
   pinMode(programChangeDownPin, INPUT_PULLUP);
 
