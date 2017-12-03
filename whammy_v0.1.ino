@@ -1,20 +1,25 @@
+// Takes a momantary footswitch up and down and turns it into
+// a MIDI signal for a Digitech Whammy.
+static const byte versionMajor = 0;
+static const byte versionMinor = 1;
+
+// Libraries
 #include <MIDI.h>
 #include <Bounce.h>
 
+// User definitions
 #include "pins.h"
 #include "buttons.h"
 #include "midiSettings.h"
-
-// Takes a footswitch up and down and turns it into
-// a MIDI signal for a Digitech Whammy
-static const byte version = 1;
 
 /* *****************************************
  * Run once upon boot of Teensy
  * *****************************************/
 void setup() {
   Serial.print("Whammy MIDI: Version: ");
-  Serial.println(version);
+  Serial.print(versionMajor);
+  Serial.print(".");
+  Serial.println(versionMinor);
 
   // Set Pin modes
   pinMode(onLedPin, OUTPUT);
@@ -52,11 +57,13 @@ void loop() {
  * Send a Program Change via MIDI
  * *****************************************/
 void sendProgramChange(byte changeDirection) {
-  // Change the current program up or down
+  // Change the current program up or down (not to exceed min or max)
   if (changeDirection >= 0) {
-    currentProgram = (currentProgram < maxProgram) ? currentProgram++ : minProgram;
+    // Up
+    currentProgram = (currentProgram < maxProgram) ? currentProgram + 1 : minProgram;
   } else {
-    currentProgram = (currentProgram > minProgram) ? currentProgram-- : maxProgram;
+    // Down
+    currentProgram = (currentProgram > minProgram) ? currentProgram - 1 : maxProgram;
   } // changeDirection
 
   // Send the program change via MIDI
