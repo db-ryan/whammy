@@ -10,8 +10,8 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 static const byte midiChannel = 1; // MIDI Channel to use
 
 // Set the current channel
-const unsigned int maxProgram = 63;
-const unsigned int minProgram = 43;
+const unsigned int maxProgram = 20;
+const unsigned int minProgram = 0;
 unsigned int currentProgram   = minProgram;
 
 struct MidiSettings {
@@ -20,28 +20,51 @@ struct MidiSettings {
     43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63
   }; // programNumber
 
-  const char* lcdDisplay[21] = {
-    "UP 2 OCT",
-    "UP OCT",
-    "UP 5th",
-    "UP 4th",
-    "DOWN 2nd",
-    "DOWN 4th",
-    "DOWN 5th",
-    "DOWN OCT",
-    "DOWN 2OCT",
-    "DIVE BOMB",
-    "DEEP",
-    "SHALOW",
-    "UP 2nd\nUP 3rd",
-    "UP b3rd\nUP 3rd",
-    "UP 3rd\nUP 4th",
-    "UP 4th\nUP 5th",
-    "UP 5th\nUP 6th",
-    "UP 5th\nUP 7th",
-    "DOWN 4th\nDOWN 3rd",
-    "DOWN 5th\nDOWN 4th",
-    "DOWN OCT\nUP OCT"
-  }; // lcdDisplay
-  //char* lcdDisplay[21];
+  const char* lcdDisplayFirstLine[21] = {
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "_/ Up 2nd",
+    "_/ Up b3rd",
+    "_/ Up 3rd",
+    "_/ Up 4th",
+    "_/ Up 5th",
+    "_/ Up 5th",
+    "_/ Down 4th",
+    "_/ Down 5th",
+    "_/ Down OCT"
+  }; // lcdDisplayFirstLine
+
+  const char* lcdDisplaySecondLine[21] = {
+    "__ Up 2 OCT",
+    "__ Up OCT",
+    "__ Up 5th",
+    "__ Up 4th",
+    "__ Down 2nd",
+    "__ Down 4th",
+    "__ Down 5th",
+    "__ Down OCT",
+    "__ Down 2 OCT",
+    "__ Dive Bomb",
+    "Deep",
+    "Shallow",
+    "__ Up 3rd",
+    "__ Up 3rd",
+    "__ Up 4th",
+    "__ Up 5th",
+    "__ Up 6th",
+    "__ Up 7th",
+    "__ Down 3rd",
+    "__ Down 4th",
+    "__ Up OCT"
+  }; // lcdDisplaySecondLine
 }; // MidiSettings

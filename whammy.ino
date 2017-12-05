@@ -13,6 +13,10 @@ static const byte versionMinor = 1;
 #include "buttons.h"
 #include "midiSettings.h"
 
+// Initializations
+LiquidCrystal lcd(lcdRsPin, lcdEnablePin, lcdD4Pin, lcdD5Pin, lcdD6Pin, lcdD7Pin);
+MidiSettings midiSettings;
+
 /* *****************************************
  * Run once upon boot of Teensy
  * *****************************************/
@@ -35,12 +39,10 @@ void setup() {
 
   // Set MIDI to begin and create Midi Settings
   MIDI.begin();
-  MidiSettings midiSettings;
-  Serial.print(midiSettings.programNumber[0]);
-  Serial.print(midiSettings.lcdDisplay[0]);
+  /*Serial.print(midiSettings.programNumber[0]);*/
+  /*Serial.print(midiSettings.lcdDisplayFirstLine[0]);*/
 
   // Set LCD Pins and Enable
-  LiquidCrystal lcd(lcdRsPin, lcdEnablePin, lcdD4Pin, lcdD5Pin, lcdD6Pin, lcdD7Pin);
   lcd.begin(16, 2);
   lcd.print("Whammy MIDI: Version:");
   lcd.setCursor(0,1); // 2nd Line
@@ -85,8 +87,15 @@ void sendProgramChange(byte changeDirection) {
     currentProgram = (currentProgram > minProgram) ? currentProgram - 1 : maxProgram;
   } // changeDirection
 
+  // Set the LCD to display the current setting
+  Serial.println("Sending text to LCD.");
+  lcd.setCursor(0, 0);
+  lcd.print(midiSettings.lcdDisplayFirstLine[currentProgram]);
+  lcd.setCursor(0, 1);
+  lcd.print(midiSettings.lcdDisplaySecondLine[currentProgram]);
+
   // Send the program change via MIDI
-  MIDI.sendProgramChange(currentProgram, midiChannel);
+  MIDI.sendProgramChange(midiSettings.programNumber[currentProgram], midiChannel);
   Serial.println("MIDI Change sent.");
 } // sendProgramChange
 
