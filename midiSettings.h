@@ -1,9 +1,8 @@
 #pragma once
 
-/*
-   MIDI/Footswitch Settings
-*/
-
+/* ******************************************************************
+ * MIDI Footswitch Settings
+ * ******************************************************************/
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // Select MIDI Channel

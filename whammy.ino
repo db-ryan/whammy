@@ -1,5 +1,9 @@
-// Takes a momantary footswitch up and down and turns it into
-// a MIDI signal for a Digitech Whammy.
+/* ******************************************************************
+ * Takes two momantary footswitches (up and down) and turns it into
+ * a MIDI signal for a Digitech Whammy. Displays the exact
+ * Whammy settings on the 16x2 LCD.
+ * ******************************************************************/
+
 static const byte versionMajor = 0;
 static const byte versionMinor = 1;
 
@@ -17,9 +21,9 @@ static const byte versionMinor = 1;
 LiquidCrystal lcd(lcdRsPin, lcdEnablePin, lcdD4Pin, lcdD5Pin, lcdD6Pin, lcdD7Pin);
 MidiSettings midiSettings;
 
-/* *****************************************
+/* ******************************************************************
  * Run once upon boot of Teensy
- * *****************************************/
+ * ******************************************************************/
 void setup() {
   Serial.print("Whammy MIDI: Version: ");
   Serial.print(versionMajor);
@@ -52,9 +56,9 @@ void setup() {
   digitalWrite(onLedPin, HIGH);
 } // setup
 
-/* *****************************************
+/* ******************************************************************
  * Loop when Teensy is running
- * *****************************************/
+ * ******************************************************************/
 void loop() {
   // Look for falling edge of buttons (low true)
   bool buttonUpPressed   = buttonUp.update() && buttonUp.fallingEdge();
@@ -74,9 +78,9 @@ void loop() {
 
 } // loop
 
-/* *****************************************
+/* ******************************************************************
  * Send a Program Change via MIDI
- * *****************************************/
+ * ******************************************************************/
 void sendProgramChange(byte changeDirection) {
   // Change the current program up or down (not to exceed min or max)
   if (changeDirection >= 0) {
