@@ -48,6 +48,7 @@ void setup() {
 
   // Set LCD Pins and Enable
   lcd.begin(16, 2);
+  lcd.setCursor(0,0);
   lcd.print("Whammy MIDI: Version:");
   lcd.setCursor(0,1); // 2nd Line
   lcd.print(versionMajor);
