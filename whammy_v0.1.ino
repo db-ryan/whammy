@@ -70,4 +70,3 @@ void sendProgramChange(byte changeDirection) {
   MIDI.sendProgramChange(currentProgram, midiChannel);
   Serial.println("MIDI Change sent.");
 } // sendProgramChange
-
